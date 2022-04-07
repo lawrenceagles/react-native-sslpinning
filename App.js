@@ -6,7 +6,6 @@
  * @flow strict-local
  */
 
-import React, { useState, useEffect } from 'react';
 import { fetch } from 'react-native-ssl-pinning';
 
 import {
@@ -23,9 +22,8 @@ const App = () => {
     fetch("https://jsonplaceholder.typicode.com/posts/1", {
       method: "GET",
       timeoutInterval: 10000,
-      // your certificates array (needed only in android) ios will pick it automatically
       sslPinning: {
-        certs: ["mycert1"] // your certificates name (without extension), for example cert1.cer, cert2.cer
+        certs: ["mycert1"]
       }
     })
       .then(response => {
@@ -40,9 +38,8 @@ const App = () => {
     fetch("https://jsonplaceholder.typicode.com/posts/1", {
       method: "GET",
       timeoutInterval: 10000,
-      // your certificates array (needed only in android) ios will pick it automatically
       sslPinning: {
-        certs: ["mycert1"] // your certificates name (without extension), for example cert1.cer, cert2.cer
+        certs: ["jphcert1"]
       }
     })
       .then(response => {
@@ -65,7 +62,7 @@ const App = () => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={secureFetchData}
+        onPress={fetchData}
       >
         <Text style={styles.text}>
           Fetch data
@@ -75,7 +72,7 @@ const App = () => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={fetchData}
+        onPress={secureFetchData}
       >
         <Text style={styles.text}>
           Fetch secured data
