@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-
+import React from 'react';
 import { fetch } from 'react-native-ssl-pinning';
 
 import {
