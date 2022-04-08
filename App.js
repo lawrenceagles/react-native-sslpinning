@@ -14,12 +14,47 @@ import {
   View,
 } from 'react-native';
 
+import { fetch } from 'react-native-ssl-pinning';
+
+
 
 const App = () => {
 
-  const fetchData = () => { console.log("fetching data") }
 
-  const secureFetchData = () => { console.log("fetching secured data") }
+
+
+  const fetchData = () => {
+    fetch("https://jsonplaceholder.typicode.com/posts/1", {
+      method: "GET",
+      timeoutInterval: 10000,
+      sslPinning: {
+        certs: ["expcert"]
+      }
+    })
+      .then(response => {
+        console.log(JSON.stringify(response.bodyString, null, "\t"))
+      })
+      .catch(err => {
+        console.log(`error: ${err}`)
+      });
+  }
+
+
+  const secureFetchData = () => {
+    fetch("https://jsonplaceholder.typicode.com/posts/1", {
+      method: "GET",
+      timeoutInterval: 10000,
+      sslPinning: {
+        certs: ["mycert"]
+      }
+    })
+      .then(response => {
+        console.log(JSON.stringify(response.bodyString, null, "\t"))
+      })
+      .catch(err => {
+        console.log(`error: ${err}`)
+      })
+  }
 
   return (
     <View
